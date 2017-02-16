@@ -23,7 +23,6 @@ describe DockingStation do
     # bike1 = Bike.new
     docking_station.dock(@bike)
     expect(docking_station.release_bike).to eq @bike
-
   end
 
   it "raises an error if it's empty" do
@@ -41,7 +40,7 @@ describe DockingStation do
 
   it "returns an error message if it's full" do
     # bike = Bike.new
-    docking_station.dock(@bike)
+    20.times {docking_station.dock(@bike)}
     expect {docking_station.dock(@bike)}.to raise_error("Sorry, no space left!") #if docking_station.docked_bikes has a one Bike type
   end
 
@@ -49,7 +48,11 @@ describe DockingStation do
   it "displays bike that is already docked" do
     # bike = Bike.new
     docking_station.dock(@bike)
-    expect(docking_station.docked_bikes).to eq @bike
+    expect(docking_station.docked_bikes).to be_an_instance_of Array
+    expect(docking_station.docked_bikes.last).to eq @bike
   end
 
+  it "makes a Docking Station which can hold a number of bikes" do
+    expect(subject.docked_bikes).to be_an_instance_of Array
+  end
 end
