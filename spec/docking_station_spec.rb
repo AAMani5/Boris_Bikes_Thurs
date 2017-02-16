@@ -40,7 +40,7 @@ describe DockingStation do
 
   it "returns an error message if it's full" do
     # bike = Bike.new
-    20.times {docking_station.dock(@bike)}
+    DockingStation::DEFAULT_CAPACITY.times {docking_station.dock(@bike)}
     expect {docking_station.dock(@bike)}.to raise_error("Sorry, no space left!") #if docking_station.docked_bikes has a one Bike type
   end
 
