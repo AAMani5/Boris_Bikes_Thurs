@@ -11,6 +11,7 @@ class DockingStation
 
   def release_bike
     fail "Sorry, no bikes left!" if empty?
+    fail "Sorry, no working bikes left!" if none_working?
     docked_bikes.shift
     #return docked_bikes unless docked_bikes.empty?
     #raise "Sorry, no bikes left!"
@@ -31,5 +32,9 @@ class DockingStation
 
   def empty?
     docked_bikes.empty?
+  end
+
+  def none_working?
+    docked_bikes.none?{|bike| bike.working?}
   end
 end

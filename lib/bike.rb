@@ -1,16 +1,19 @@
 class Bike
-attr_accessor :status # why is it not working when made private??
+ # why is it not working when made private??
 
   def initialize
-    @status = true
+    @is_working = true
   end
 
   def working?
-    self.status
+    is_working
   end
 
-  def report_broken(boolean = false)
-    self.status = !boolean
+  def report_broken
+    self.is_working = false
+    self
   end
 
+  private
+  attr_accessor :is_working
 end
