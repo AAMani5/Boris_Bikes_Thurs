@@ -55,4 +55,13 @@ describe DockingStation do
   it "makes a Docking Station which can hold a number of bikes" do
     expect(subject.docked_bikes).to be_an_instance_of Array
   end
+
+  it "makes a Docking Station with the default number of bike spaces" do
+    expect(docking_station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  it "makes a Docking Station with a larger number of bike spaces than the default" do
+    expect(DockingStation.new(DockingStation::DEFAULT_CAPACITY+1).capacity).to be > DockingStation::DEFAULT_CAPACITY
+  end
+
 end
