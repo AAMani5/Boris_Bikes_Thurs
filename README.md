@@ -11,5 +11,5 @@ Learning to use test-driven approach to create object-oriented code.
 - [Pair-Programing](https://github.com/makersacademy/course/blob/master/pills/pairing.md)
 
 ### Contributors
-- Joe Maidman
 - Ashwini Mani
+- Narayan O'Hanlon
