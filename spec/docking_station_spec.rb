@@ -74,4 +74,14 @@ describe DockingStation do
     expect{docking_station.release_bike}.to raise_error("Sorry, no working bikes left!")
   end
 
+  it "should only return working bikes", :focus => true do
+    broken_bike = Bike.new.report_broken
+    working_bike = Bike.new
+    docking_station = DockingStation.new
+    docking_station.dock(broken_bike)
+    docking_station.dock(working_bike)
+    expect(docking_station.release_bike).to eq working_bike
+    expect{docking_station.release_bike}.to raise_error("Sorry, no working bikes left!")
+  end
+
 end

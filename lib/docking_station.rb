@@ -12,7 +12,9 @@ class DockingStation
   def release_bike
     fail "Sorry, no bikes left!" if empty?
     fail "Sorry, no working bikes left!" if none_working?
-    docked_bikes.shift
+    bike_to_release = docked_bikes.select(&:working?).shift
+    docked_bikes.delete(bike_to_release)
+    bike_to_release
     #return docked_bikes unless docked_bikes.empty?
     #raise "Sorry, no bikes left!"
   end
