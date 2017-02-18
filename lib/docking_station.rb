@@ -26,6 +26,10 @@ class DockingStation
     docked_bikes.last
   end
 
+  def broken_bikes
+    docked_bikes.reject(&:working?)
+  end
+
   private
 
   def full?
@@ -39,4 +43,5 @@ class DockingStation
   def none_working?
     docked_bikes.none?{|bike| bike.working?}
   end
+
 end

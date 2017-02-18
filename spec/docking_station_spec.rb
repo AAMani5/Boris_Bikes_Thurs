@@ -93,4 +93,8 @@ describe DockingStation do
     expect{docking_station.release_bike}.to raise_error("Sorry, no working bikes left!")
   end
 
+  it "responds to broken_bikes method" do
+    expect(docking_station).to respond_to(:broken_bikes)
+  end
+
 end
