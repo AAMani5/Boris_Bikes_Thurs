@@ -21,4 +21,13 @@ describe Vans do
     expect(@van.load(@docking_station.broken_bikes)).to eq Array(broken_bike)
   end
 
+  it "can unload the stored bikes" do
+    broken_bike = Bike.new.report_broken
+    working_bike = Bike.new
+    @docking_station.dock(broken_bike)
+    @docking_station.dock(working_bike)
+    @van.load(@docking_station.broken_bikes)
+    expect(@van.unload).to eq Array(broken_bike)
+  end
+
 end
