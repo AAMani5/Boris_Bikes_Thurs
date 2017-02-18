@@ -2,8 +2,8 @@ require 'docking_station'
 
 describe DockingStation do
 
-  before(:all) do
-    @bike = Bike.new
+  before(:each) do
+    @bike = double(:bike)
   end
 
   alias_method :docking_station, :subject
@@ -11,6 +11,8 @@ describe DockingStation do
   ### Bike related tests - why do we have it in docking_station_spec?
   it 'bike responds to working and returns true' do
     # bike = Bike.new # dont only once in the begining
+    #bike = double(:bike)
+    allow(@bike).to receive(:working?){true} # a method stud (query)
     expect(@bike).to be_working
   end
 
@@ -21,6 +23,7 @@ describe DockingStation do
 
   it 'returns a bike, if docking station has one'do
     # bike1 = Bike.new
+    allow(@bike).to receive(:working?){true}
     docking_station.dock(@bike)
     expect(docking_station.release_bike).to eq @bike
   end
@@ -65,18 +68,24 @@ describe DockingStation do
   end
 
   it "releases only working bikes" do
+    allow(@bike).to receive(:working?){true}
     docking_station.dock(@bike)
     expect(docking_station.release_bike).to be_working
   end
 
   it "should not release broken bikes" do
+    allow(@bike).to receive(:report_broken){@bike}
+    allow(@bike).to receive(:working?){false}
     docking_station.dock(@bike.report_broken)
     expect{docking_station.release_bike}.to raise_error("Sorry, no working bikes left!")
   end
 
   it "should only return working bikes", :focus => true do
-    broken_bike = Bike.new.report_broken
-    working_bike = Bike.new
+    allow(@bike).to receive(:report_broken){@bike}
+    allow(@bike).to receive(:working?){false}
+    broken_bike = @bike.report_broken
+    working_bike = double(:working_bike)
+    allow(working_bike).to receive(:working?){true}
     docking_station = DockingStation.new
     docking_station.dock(broken_bike)
     docking_station.dock(working_bike)
