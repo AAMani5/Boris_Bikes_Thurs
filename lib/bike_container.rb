@@ -9,12 +9,17 @@ module BikeContainer
   end
 
   def add_bike(bike)
-    raise "#{self.class.name} full" if full?
+    raise "#{self.class} full" if full?
     bikes << bike
   end
 
   def empty?
     bikes.empty?
+  end
+
+  def remove_bike
+    raise "#{self.class} empty" if empty?
+    bikes.pop
   end
 
   private
